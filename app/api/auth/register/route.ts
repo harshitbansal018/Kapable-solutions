@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import clientPromise from "@/lib/mongodb"
+import getClientPromise from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
 
 export async function POST(request: NextRequest) {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Password must be at least 6 characters long" }, { status: 400 })
     }
 
-    const client = await clientPromise
+    const client = await getClientPromise()
     const db = client.db("kapable-solutions")
     const usersCollection = db.collection("users")
 
